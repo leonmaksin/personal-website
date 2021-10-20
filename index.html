@@ -21,6 +21,7 @@
 <body>
     <script src="./js/three.js"></script>
     <script src="./js/FontLoader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- <script src="./js/vanta.topology.min.js"></script> -->
     <script type="module">
 
@@ -163,7 +164,6 @@
             mesh_wander.name = mesh_trunk_wander.name = "Wander";
             scene.add( mesh_trunk_wander, mesh_wander );
             link_objects.push( mesh_wander, mesh_trunk_wander );
-            console.log(link_objects);
 
             const loader = new THREE.FontLoader();
             loader.load( './fonts/PT_Sans_Narrow_Regular.json', (font)=> {
@@ -275,6 +275,7 @@
 
 
                 document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+                document.addEventListener( 'mousemove', onDocumentMouseMove, false );
                 document.linkObjects = link_objects;
                 document.rocketList = rocketList;
 
@@ -317,7 +318,6 @@
             raycaster.setFromCamera( mouse, camera );
             var intersects = raycaster.intersectObjects( event.currentTarget.linkObjects );
 
-            console.log(intersects);
             if ( intersects.length > 0 )
             {
                 if (intersects[0].object.name == 'Leon')
@@ -338,13 +338,25 @@
                     mesh_fire.position.y = parent.children[0].position.y-8;
                     parent.userData.launchTime = Date.now();
                     parent.userData.launched = true;
-                    console.log(parent);
                     scene.add( mesh_fire );
                     parent.add( mesh_fire );
                     rocketList.push( parent );
                 }
             }
 
+        }
+
+        function onDocumentMouseMove(event) {
+            mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+            mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+            raycaster.setFromCamera( mouse, camera );
+            var intersects = raycaster.intersectObjects( event.currentTarget.linkObjects );
+
+            if(intersects.length > 0) {
+                $('html,body').css('cursor', 'pointer');
+            } else {
+                $('html,body').css('cursor', 'default');
+            }
         }
 
         function animate() {
