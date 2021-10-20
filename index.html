@@ -23,6 +23,7 @@
     <script src="./js/FontLoader.js"></script>
     <!-- <script src="./js/vanta.topology.min.js"></script> -->
     <script type="module">
+
         import { FontLoader } from './js/FontLoader.js';
         import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/examples/jsm/controls/OrbitControls.js';
 
@@ -34,7 +35,7 @@
 
         function init() {
 
-            document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+            var link_objects = [];
 
             scene = new THREE.Scene();
             scene.background = new THREE.Color( 0xcccccc );
@@ -71,10 +72,16 @@
             const geometry_leaves = new THREE.CylinderGeometry( 0, 10, 30, 4, 1 );
             const material_leaves = new THREE.MeshPhongMaterial( { color: 0x62A87D, flatShading: true } );
 
+            const material_mixed = new THREE.MeshFaceMaterial( [ material_trunk, material_leaves ] );
+            const mergeGeometry = new THREE.Geometry();
+
+            mergeGeometry.merge( geometry_trunk, geometry_trunk.matrix );
+            mergeGeometry.merge( geometry_leaves, geometry_leaves.matrix, 1 );
+
             for ( let i = 0; i < 800; i ++ ) {
 
-                // const stump_height = 8;
-                // const geometry_trunk = new THREE.CylinderGeometry(2, 2, stump_height, 16);
+                const stump_height = 8;
+                const geometry_trunk = new THREE.CylinderGeometry(2, 2, stump_height, 16);
                 const mesh_trunk = new THREE.Mesh( geometry_trunk, material_trunk );
                 const mesh_leaves = new THREE.Mesh( geometry_leaves, material_leaves );
                 mesh_trunk.position.x = mesh_leaves.position.x = Math.random() * 1600 - 800;
@@ -86,6 +93,14 @@
                 mesh_trunk.matrixAutoUpdate = false;
                 mesh_leaves.matrixAutoUpdate = false;
                 scene.add( mesh_trunk, mesh_leaves );
+
+                // const mesh = new THREE.Mesh( mergeGeometry, material_mixed );
+                // mesh.position.x = Math.random() * 1600 - 800;
+                // mesh.position.y = 8/2;
+                // mesh.position.z = Math.random() * 1600 - 800;
+                // mesh.updateMatrix();
+                // mesh.matrixAutoUpdate = false;
+                // scene.add( mesh );
 
             }
 
@@ -105,9 +120,10 @@
             mesh_ztrade.updateMatrix();
             mesh_trunk_ztrade.matrixAutoUpdate = false;
             mesh_ztrade.matrixAutoUpdate = false;
-            mesh_ztrade.name = "ZTrade";
 
+            mesh_ztrade.name = mesh_trunk_ztrade.name = "ZTrade";
             scene.add( mesh_trunk_ztrade, mesh_ztrade );
+            link_objects.push( mesh_ztrade, mesh_trunk_ztrade );
             
             //NYC Aerospace
             const material_aero = new THREE.MeshPhongMaterial( { color: 0x706C67, flatShading: true } );
@@ -122,9 +138,10 @@
             mesh_aero.updateMatrix();
             mesh_trunk_aero.matrixAutoUpdate = false;
             mesh_aero.matrixAutoUpdate = false;
-            mesh_aero.name = "NYCAerospace";
 
+            mesh_aero.name = mesh_trunk_aero.name = "NYCAerospace";
             scene.add( mesh_trunk_aero, mesh_aero );
+            link_objects.push( mesh_aero, mesh_trunk_aero );
             
             //Wander
             const material_wander = new THREE.MeshPhongMaterial( { color: 0xff5c00, flatShading: true } );
@@ -139,9 +156,11 @@
             mesh_wander.updateMatrix();
             mesh_trunk_wander.matrixAutoUpdate = false;
             mesh_wander.matrixAutoUpdate = false;
-            mesh_wander.name = "Wander";
 
+            mesh_wander.name = mesh_trunk_wander.name = "Wander";
             scene.add( mesh_trunk_wander, mesh_wander );
+            link_objects.push( mesh_wander, mesh_trunk_wander );
+            console.log(link_objects);
 
             const loader = new THREE.FontLoader();
             loader.load( './fonts/PT_Sans_Narrow_Regular.json', (font)=> {
@@ -162,9 +181,9 @@
                 mesh_text.position.z = 200;
                 mesh_text.position.y = 100;
                 mesh_text.rotation.y = (Math.PI/2);
-                console.log(mesh_text);
                 mesh_text.name = "Leon";
                 scene.add( mesh_text );
+                link_objects.push( mesh_text );
 
                 const text_geometry_s = new THREE.TextGeometry( 'Click the big trees', {
                     font: font,
@@ -177,8 +196,6 @@
                 mesh_text_s.position.z = 120;
                 mesh_text_s.position.y = 65;
                 mesh_text_s.rotation.y = (Math.PI/2);
-                console.log(mesh_text);
-                mesh_text.name = "Leon";
                 scene.add( mesh_text_s );
 
                 const text_geometry_z = new THREE.TextGeometry( 'ZTrade', {
@@ -189,12 +206,20 @@
                     bevelEnabled: false
                 });
                 const text_material_z = new THREE.MeshPhongMaterial( { color: 0x007bff } );
+                const box_material_z = new THREE.MeshPhongMaterial( { visible: false } );
                 const mesh_text_z = new THREE.Mesh( text_geometry_z, text_material_z );
-                mesh_text_z.position.x = 90;
-                mesh_text_z.position.y = 40;
-                mesh_text_z.position.z = 250;
-                mesh_text_z.rotation.y = (Math.PI/2);
+                const mesh_box_z = new THREE.Mesh( new THREE.BoxGeometry(70,20,4), box_material_z );
+                mesh_text_z.position.x = mesh_box_z.position.x = 90;
+                mesh_text_z.position.y = mesh_box_z.position.y = 40;
+                mesh_text_z.position.z = mesh_box_z.position.z = 250;
+                mesh_box_z.position.y += 10;
+                mesh_box_z.position.z -= 35;
+                mesh_text_z.rotation.y = mesh_box_z.rotation.y = (Math.PI/2);
+
                 scene.add( mesh_text_z );
+                mesh_box_z.name = "ZTrade";
+                scene.add( mesh_box_z );
+                link_objects.push( mesh_box_z );
 
                 const text_geometry_a = new THREE.TextGeometry( 'NYC Aerospace', {
                     font: font,
@@ -204,12 +229,23 @@
                     bevelEnabled: false
                 });
                 const text_material_a = new THREE.MeshPhongMaterial( { color: 0x706C67 } );
+                const box_material_a = new THREE.MeshPhongMaterial( { visible: false } );
                 const mesh_text_a = new THREE.Mesh( text_geometry_a, text_material_a );
-                mesh_text_a.position.x = 90;
-                mesh_text_a.position.y = 40;
-                mesh_text_a.position.z = -140;
-                mesh_text_a.rotation.y = (Math.PI/2);
+                const mesh_box_a = new THREE.Mesh( new THREE.BoxGeometry(150,20,4), box_material_a );
+                mesh_text_a.position.x = mesh_box_a.position.x = 90;
+                mesh_text_a.position.y = mesh_box_a.position.y = 40;
+                mesh_text_a.position.z = mesh_box_a.position.z = -140;
+                mesh_box_a.position.y += 10;
+                mesh_box_a.position.z -= 75;
+                mesh_text_a.rotation.y = mesh_box_a.rotation.y = (Math.PI/2);
+
                 scene.add( mesh_text_a );
+                mesh_box_a.name = "NYCAerospace";
+                scene.add( mesh_box_a );
+                link_objects.push( mesh_box_a );
+
+
+
 
                 const text_geometry_w = new THREE.TextGeometry( 'Wander', {
                     font: font,
@@ -219,13 +255,24 @@
                     bevelEnabled: false
                 });
                 const text_material_w = new THREE.MeshPhongMaterial( { color: 0xff5c00 } );
+                const box_material_w = new THREE.MeshPhongMaterial( { visible: false } );
                 const mesh_text_w = new THREE.Mesh( text_geometry_w, text_material_w );
-                mesh_text_w.position.x = -90;
-                mesh_text_w.position.y = 40;
-                mesh_text_w.position.z = 100;
+                const mesh_box_w = new THREE.Mesh( new THREE.BoxGeometry(80,20,4), box_material_w );
+                mesh_text_w.position.x = mesh_box_w.position.x = -90;
+                mesh_text_w.position.y = mesh_box_w.position.y = 40;
+                mesh_text_w.position.z = mesh_box_w.position.z = 100;
+                mesh_box_w.position.y += 10;
+                mesh_box_w.position.z -= 40;
+                mesh_text_w.rotation.y = mesh_box_w.rotation.y = (Math.PI/2);
 
-                mesh_text_w.rotation.y = (Math.PI/2);
                 scene.add( mesh_text_w );
+                mesh_box_w.name = "Wander";
+                scene.add( mesh_box_w );
+                link_objects.push( mesh_box_w );
+
+
+                document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+                document.linkObjects = link_objects;
 
             });
 
@@ -260,19 +307,13 @@
 
         function onDocumentMouseDown( event ) {
 
-            const link_objects = [
-                scene.getObjectByName( 'Leon' ),
-                scene.getObjectByName( 'ZTrade' ),
-                scene.getObjectByName( 'NYCAerospace' ),
-                scene.getObjectByName( 'Wander' )
-            ];
-
             // update the mouse variable
             mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
             mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
             raycaster.setFromCamera( mouse, camera );
-            var intersects = raycaster.intersectObjects( link_objects );
+            var intersects = raycaster.intersectObjects( event.currentTarget.linkObjects );
 
+            console.log(intersects);
             if ( intersects.length > 0 )
             {
                 if (intersects[0].object.name == 'Leon')
