@@ -28,6 +28,7 @@
         import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/examples/jsm/controls/OrbitControls.js';
 
         let camera, controls, scene, renderer;
+        var rocketList = [];
 
         init();
         //render(); // remove when using next line for animation loop (requestAnimationFrame)
@@ -72,12 +73,6 @@
             const geometry_leaves = new THREE.CylinderGeometry( 0, 10, 30, 4, 1 );
             const material_leaves = new THREE.MeshPhongMaterial( { color: 0x62A87D, flatShading: true } );
 
-            const material_mixed = new THREE.MeshFaceMaterial( [ material_trunk, material_leaves ] );
-            const mergeGeometry = new THREE.Geometry();
-
-            mergeGeometry.merge( geometry_trunk, geometry_trunk.matrix );
-            mergeGeometry.merge( geometry_leaves, geometry_leaves.matrix, 1 );
-
             for ( let i = 0; i < 800; i ++ ) {
 
                 const stump_height = 8;
@@ -88,11 +83,19 @@
                 mesh_trunk.position.y = mesh_leaves.position.y = 8/2;
                 mesh_trunk.position.z = mesh_leaves.position.z = Math.random() * 1600 - 800;
                 mesh_leaves.position.y += (15+8/2);
-                mesh_trunk.updateMatrix();
-                mesh_leaves.updateMatrix();
-                mesh_trunk.matrixAutoUpdate = false;
-                mesh_leaves.matrixAutoUpdate = false;
-                scene.add( mesh_trunk, mesh_leaves );
+
+                const group = new THREE.Group();
+                group.add( mesh_trunk );
+                group.add( mesh_leaves );
+                // group.name = mesh_trunk.name = mesh_leaves.name = 'tree'+i;
+                group.userData.launched = false;
+
+                group.updateMatrix();
+                // mesh_trunk.matrixAutoUpdate = false;
+                // mesh_leaves.matrixAutoUpdate = false;
+                group.name = 'tree'+i;
+                scene.add( group );
+                link_objects.push( mesh_trunk, mesh_leaves );
 
                 // const mesh = new THREE.Mesh( mergeGeometry, material_mixed );
                 // mesh.position.x = Math.random() * 1600 - 800;
@@ -185,7 +188,7 @@
                 scene.add( mesh_text );
                 link_objects.push( mesh_text );
 
-                const text_geometry_s = new THREE.TextGeometry( 'Click the big trees', {
+                const text_geometry_s = new THREE.TextGeometry( 'Click the trees', {
                     font: font,
                     size: 20,
                     height: 4,
@@ -193,7 +196,7 @@
                 });
                 const text_material_s = new THREE.MeshPhongMaterial( { color: 0x3C3939 } );
                 const mesh_text_s = new THREE.Mesh( text_geometry_s, text_material_s );
-                mesh_text_s.position.z = 120;
+                mesh_text_s.position.z = 100;
                 mesh_text_s.position.y = 65;
                 mesh_text_s.rotation.y = (Math.PI/2);
                 scene.add( mesh_text_s );
@@ -273,6 +276,7 @@
 
                 document.addEventListener( 'mousedown', onDocumentMouseDown, false );
                 document.linkObjects = link_objects;
+                document.rocketList = rocketList;
 
             });
 
@@ -320,9 +324,25 @@
                     intersects[0].object.material.color.setRGB( 0.8 * Math.random() + 0.2,
                     0.8 * Math.random() + 0.2,
                     0.8 * Math.random() + 0.2 );
-                if (intersects[0].object.name == 'ZTrade') window.open("https://api.ztrade.store/");
-                if (intersects[0].object.name == 'NYCAerospace') window.open("https://www.nycaerospace.org/");
-                if (intersects[0].object.name == 'Wander') window.open("https://www.thinkwander.com/");
+                else if (intersects[0].object.name == 'ZTrade') window.open("https://api.ztrade.store/");
+                else if (intersects[0].object.name == 'NYCAerospace') window.open("https://www.nycaerospace.org/");
+                else if (intersects[0].object.name == 'Wander') window.open("https://www.thinkwander.com/");
+                else {
+                    const parent = intersects[0].object.parent;
+                    if (parent.userData.launched == true) return;
+                    const geometry_fire = new THREE.CylinderGeometry( 2, 0, 8, 8, 1 );
+                    const material_fire = new THREE.MeshPhongMaterial( { color: 0xFB9C0C, flatShading: true } );
+                    const mesh_fire = new THREE.Mesh( geometry_fire, material_fire );
+                    mesh_fire.position.x = parent.children[0].position.x;
+                    mesh_fire.position.z = parent.children[0].position.z;
+                    mesh_fire.position.y = parent.children[0].position.y-8;
+                    parent.userData.launchTime = Date.now();
+                    parent.userData.launched = true;
+                    console.log(parent);
+                    scene.add( mesh_fire );
+                    parent.add( mesh_fire );
+                    rocketList.push( parent );
+                }
             }
 
         }
@@ -330,6 +350,21 @@
         function animate() {
 
             requestAnimationFrame( animate );
+
+            for ( let i = 0; i < rocketList.length; ++i ) {
+                const elapsed = Date.now() - rocketList[i].userData.launchTime;
+                const children = rocketList[i].children;
+                children[1].rotation.y += (Math.PI/360);
+                children[0].position.y += Math.pow(elapsed/1000,2);
+                children[1].position.y += Math.pow(elapsed/1000,2);
+                children[2].position.y += Math.pow(elapsed/1000,2);
+                if (children[1].position.y > 500) {
+                    children[0].position.y = 100000;
+                    children[1].position.y = 100000;
+                    children[2].position.y = 100000;
+                    rocketList.splice(i,1);
+                }
+            }
 
             controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
 
