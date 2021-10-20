@@ -22,7 +22,6 @@
     <script src="./js/three.js"></script>
     <script src="./js/FontLoader.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- <script src="./js/vanta.topology.min.js"></script> -->
     <script type="module">
 
         import { FontLoader } from './js/FontLoader.js';
@@ -34,6 +33,31 @@
         init();
         //render(); // remove when using next line for animation loop (requestAnimationFrame)
         animate();
+
+        
+
+        function createTree(name,color,x,y,z,link_objects) {
+            const geometry_trunk_long = new THREE.CylinderGeometry(4, 4, 100, 16);
+            const geometry_leaves_large = new THREE.CylinderGeometry( 0, 45, 90, 4, 1 );
+            
+            const material = new THREE.MeshPhongMaterial( { color: color, flatShading: true } );
+            const material_trunk = new THREE.MeshPhongMaterial( { color: 0x4D4424, flatShading: true } );
+            const mesh_trunk = new THREE.Mesh ( geometry_trunk_long, material_trunk );
+            const mesh = new THREE.Mesh ( geometry_leaves_large, material );
+
+            mesh_trunk.position.x = mesh.position.x = x;
+            mesh_trunk.position.y = mesh.position.y = y;
+            mesh_trunk.position.z = mesh.position.z = z;
+            mesh.position.y += (15+y);
+            mesh_trunk.updateMatrix();
+            mesh.updateMatrix();
+            mesh_trunk.matrixAutoUpdate = false;
+            mesh.matrixAutoUpdate = false;
+
+            mesh.name = mesh_trunk.name = name;
+            scene.add( mesh_trunk, mesh );
+            link_objects.push( mesh, mesh_trunk );
+        }
 
         function init() {
 
@@ -88,23 +112,11 @@
                 const group = new THREE.Group();
                 group.add( mesh_trunk );
                 group.add( mesh_leaves );
-                // group.name = mesh_trunk.name = mesh_leaves.name = 'tree'+i;
                 group.userData.launched = false;
-
                 group.updateMatrix();
-                // mesh_trunk.matrixAutoUpdate = false;
-                // mesh_leaves.matrixAutoUpdate = false;
                 group.name = 'tree'+i;
                 scene.add( group );
                 link_objects.push( mesh_trunk, mesh_leaves );
-
-                // const mesh = new THREE.Mesh( mergeGeometry, material_mixed );
-                // mesh.position.x = Math.random() * 1600 - 800;
-                // mesh.position.y = 8/2;
-                // mesh.position.z = Math.random() * 1600 - 800;
-                // mesh.updateMatrix();
-                // mesh.matrixAutoUpdate = false;
-                // scene.add( mesh );
 
             }
 
@@ -112,58 +124,13 @@
             const geometry_leaves_large = new THREE.CylinderGeometry( 0, 45, 90, 4, 1 );
             
             //ZTrade
-            const material_ztrade = new THREE.MeshPhongMaterial( { color: 0x007bff, flatShading: true } );
-            const mesh_trunk_ztrade = new THREE.Mesh ( geometry_trunk_long, material_trunk );
-            const mesh_ztrade = new THREE.Mesh ( geometry_leaves_large, material_ztrade );
-
-            mesh_trunk_ztrade.position.x = mesh_ztrade.position.x = 60;
-            mesh_trunk_ztrade.position.y = mesh_ztrade.position.y = 100/2;
-            mesh_trunk_ztrade.position.z = mesh_ztrade.position.z = 220;
-            mesh_ztrade.position.y += (15+100/2);
-            mesh_trunk_ztrade.updateMatrix();
-            mesh_ztrade.updateMatrix();
-            mesh_trunk_ztrade.matrixAutoUpdate = false;
-            mesh_ztrade.matrixAutoUpdate = false;
-
-            mesh_ztrade.name = mesh_trunk_ztrade.name = "ZTrade";
-            scene.add( mesh_trunk_ztrade, mesh_ztrade );
-            link_objects.push( mesh_ztrade, mesh_trunk_ztrade );
+            createTree('ZTrade',0x007bff,60,50,220,link_objects);
             
             //NYC Aerospace
-            const material_aero = new THREE.MeshPhongMaterial( { color: 0x706C67, flatShading: true } );
-            const mesh_trunk_aero = new THREE.Mesh ( geometry_trunk_long, material_trunk );
-            const mesh_aero = new THREE.Mesh ( geometry_leaves_large, material_aero );
-
-            mesh_trunk_aero.position.x = mesh_aero.position.x = 60;
-            mesh_trunk_aero.position.y = mesh_aero.position.y = 100/2;
-            mesh_trunk_aero.position.z = mesh_aero.position.z = -220;
-            mesh_aero.position.y += (15+100/2);
-            mesh_trunk_aero.updateMatrix();
-            mesh_aero.updateMatrix();
-            mesh_trunk_aero.matrixAutoUpdate = false;
-            mesh_aero.matrixAutoUpdate = false;
-
-            mesh_aero.name = mesh_trunk_aero.name = "NYCAerospace";
-            scene.add( mesh_trunk_aero, mesh_aero );
-            link_objects.push( mesh_aero, mesh_trunk_aero );
+            createTree('NYCAerospace',0x706C67,60,50,-220,link_objects);
             
             //Wander
-            const material_wander = new THREE.MeshPhongMaterial( { color: 0xff5c00, flatShading: true } );
-            const mesh_trunk_wander = new THREE.Mesh ( geometry_trunk_long, material_trunk );
-            const mesh_wander = new THREE.Mesh ( geometry_leaves_large, material_wander );
-
-            mesh_trunk_wander.position.x = mesh_wander.position.x = -120;
-            mesh_trunk_wander.position.y = mesh_wander.position.y = 100/2;
-            mesh_trunk_wander.position.z = mesh_wander.position.z = 60;
-            mesh_wander.position.y += (15+100/2);
-            mesh_trunk_wander.updateMatrix();
-            mesh_wander.updateMatrix();
-            mesh_trunk_wander.matrixAutoUpdate = false;
-            mesh_wander.matrixAutoUpdate = false;
-
-            mesh_wander.name = mesh_trunk_wander.name = "Wander";
-            scene.add( mesh_trunk_wander, mesh_wander );
-            link_objects.push( mesh_wander, mesh_trunk_wander );
+            createTree('Wander',0xff5c00,-120,50,60,link_objects);
 
             const loader = new THREE.FontLoader();
             loader.load( './fonts/PT_Sans_Narrow_Regular.json', (font)=> {
@@ -379,29 +346,14 @@
             }
 
             controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
-
             render();
 
         }
 
         function render() {
-
             renderer.render( scene, camera );
-
         }
 
     </script>
-    <!--<script>
-        VANTA.TOPOLOGY({
-            el: "body",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00
-        })
-    </script>-->
 </body>
 </html>
