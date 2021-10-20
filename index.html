@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Leon</title>
+    <style>
+        body {
+            background-color: #ccc;
+            color: #000;
+        }
+    </style>
+    <link rel="icon" 
+        type="image/ico" 
+        href="./img/favicon.ico">
+    </head>
+</head>
+
+<body>
+    <script src="./js/three.js"></script>
+    <script src="./js/FontLoader.js"></script>
+    <!-- <script src="./js/vanta.topology.min.js"></script> -->
+    <script type="module">
+        import { FontLoader } from './js/FontLoader.js';
+        import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/examples/jsm/controls/OrbitControls.js';
+
+        let camera, controls, scene, renderer;
+
+        init();
+        //render(); // remove when using next line for animation loop (requestAnimationFrame)
+        animate();
+
+        function init() {
+
+            document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color( 0xcccccc );
+            scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
+
+            renderer = new THREE.WebGLRenderer( { antialias: true } );
+            renderer.setPixelRatio( window.devicePixelRatio );
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            document.body.appendChild( renderer.domElement );
+
+            camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
+            camera.position.set( 400, 200, 0 );
+
+            // controls
+
+            controls = new OrbitControls( camera, renderer.domElement );
+            controls.listenToKeyEvents( window ); // optional
+
+            //controls.addEventListener( 'change', render ); // call this only in static scenes (i.e., if there is no animation loop)
+
+            controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+            controls.dampingFactor = 0.05;
+
+            controls.screenSpacePanning = false;
+
+            controls.minDistance = 100;
+            controls.maxDistance = 500;
+
+            controls.maxPolarAngle = Math.PI / 2;
+
+            // world
+            const geometry_trunk = new THREE.CylinderGeometry(2, 2, 8, 16);
+            const material_trunk = new THREE.MeshPhongMaterial( { color: 0x4D4424, flatShading: true } );
+            const geometry_leaves = new THREE.CylinderGeometry( 0, 10, 30, 4, 1 );
+            const material_leaves = new THREE.MeshPhongMaterial( { color: 0x62A87D, flatShading: true } );
+
+            for ( let i = 0; i < 800; i ++ ) {
+
+                // const stump_height = 8;
+                // const geometry_trunk = new THREE.CylinderGeometry(2, 2, stump_height, 16);
+                const mesh_trunk = new THREE.Mesh( geometry_trunk, material_trunk );
+                const mesh_leaves = new THREE.Mesh( geometry_leaves, material_leaves );
+                mesh_trunk.position.x = mesh_leaves.position.x = Math.random() * 1600 - 800;
+                mesh_trunk.position.y = mesh_leaves.position.y = 8/2;
+                mesh_trunk.position.z = mesh_leaves.position.z = Math.random() * 1600 - 800;
+                mesh_leaves.position.y += (15+8/2);
+                mesh_trunk.updateMatrix();
+                mesh_leaves.updateMatrix();
+                mesh_trunk.matrixAutoUpdate = false;
+                mesh_leaves.matrixAutoUpdate = false;
+                scene.add( mesh_trunk, mesh_leaves );
+
+            }
+
+            const geometry_trunk_long = new THREE.CylinderGeometry(4, 4, 100, 16);
+            const geometry_leaves_large = new THREE.CylinderGeometry( 0, 45, 90, 4, 1 );
+            
+            //ZTrade
+            const material_ztrade = new THREE.MeshPhongMaterial( { color: 0x007bff, flatShading: true } );
+            const mesh_trunk_ztrade = new THREE.Mesh ( geometry_trunk_long, material_trunk );
+            const mesh_ztrade = new THREE.Mesh ( geometry_leaves_large, material_ztrade );
+
+            mesh_trunk_ztrade.position.x = mesh_ztrade.position.x = 60;
+            mesh_trunk_ztrade.position.y = mesh_ztrade.position.y = 100/2;
+            mesh_trunk_ztrade.position.z = mesh_ztrade.position.z = 220;
+            mesh_ztrade.position.y += (15+100/2);
+            mesh_trunk_ztrade.updateMatrix();
+            mesh_ztrade.updateMatrix();
+            mesh_trunk_ztrade.matrixAutoUpdate = false;
+            mesh_ztrade.matrixAutoUpdate = false;
+            mesh_ztrade.name = "ZTrade";
+
+            scene.add( mesh_trunk_ztrade, mesh_ztrade );
+            
+            //NYC Aerospace
+            const material_aero = new THREE.MeshPhongMaterial( { color: 0x706C67, flatShading: true } );
+            const mesh_trunk_aero = new THREE.Mesh ( geometry_trunk_long, material_trunk );
+            const mesh_aero = new THREE.Mesh ( geometry_leaves_large, material_aero );
+
+            mesh_trunk_aero.position.x = mesh_aero.position.x = 60;
+            mesh_trunk_aero.position.y = mesh_aero.position.y = 100/2;
+            mesh_trunk_aero.position.z = mesh_aero.position.z = -220;
+            mesh_aero.position.y += (15+100/2);
+            mesh_trunk_aero.updateMatrix();
+            mesh_aero.updateMatrix();
+            mesh_trunk_aero.matrixAutoUpdate = false;
+            mesh_aero.matrixAutoUpdate = false;
+            mesh_aero.name = "NYCAerospace";
+
+            scene.add( mesh_trunk_aero, mesh_aero );
+            
+            //Wander
+            const material_wander = new THREE.MeshPhongMaterial( { color: 0xff5c00, flatShading: true } );
+            const mesh_trunk_wander = new THREE.Mesh ( geometry_trunk_long, material_trunk );
+            const mesh_wander = new THREE.Mesh ( geometry_leaves_large, material_wander );
+
+            mesh_trunk_wander.position.x = mesh_wander.position.x = -120;
+            mesh_trunk_wander.position.y = mesh_wander.position.y = 100/2;
+            mesh_trunk_wander.position.z = mesh_wander.position.z = 60;
+            mesh_wander.position.y += (15+100/2);
+            mesh_trunk_wander.updateMatrix();
+            mesh_wander.updateMatrix();
+            mesh_trunk_wander.matrixAutoUpdate = false;
+            mesh_wander.matrixAutoUpdate = false;
+            mesh_wander.name = "Wander";
+
+            scene.add( mesh_trunk_wander, mesh_wander );
+
+            const loader = new THREE.FontLoader();
+            loader.load( './fonts/PT_Sans_Narrow_Regular.json', (font)=> {
+                const text_geometry = new THREE.TextGeometry( 'Leon Maksin', {
+                    font: font,
+                    size: 60,
+                    height: 12,
+                    curveSegments: 12,
+                    bevelEnabled: true,
+                    bevelThickness: 1,
+                    bevelSize: 2,
+                    bevelOffsets: 0,
+                    belelSegments: 10
+                });
+                // const text_material = new THREE.MeshPhongMaterial( { color: 0xE3B16B } );
+                const text_material = new THREE.MeshPhongMaterial( { color: 0x3C3939 } );
+                const mesh_text = new THREE.Mesh( text_geometry, text_material );
+                mesh_text.position.z = 200;
+                mesh_text.position.y = 100;
+                mesh_text.rotation.y = (Math.PI/2);
+                console.log(mesh_text);
+                mesh_text.name = "Leon";
+                scene.add( mesh_text );
+
+                const text_geometry_s = new THREE.TextGeometry( 'Click the big trees', {
+                    font: font,
+                    size: 20,
+                    height: 4,
+                    curveSegments: 12
+                });
+                const text_material_s = new THREE.MeshPhongMaterial( { color: 0x3C3939 } );
+                const mesh_text_s = new THREE.Mesh( text_geometry_s, text_material_s );
+                mesh_text_s.position.z = 120;
+                mesh_text_s.position.y = 65;
+                mesh_text_s.rotation.y = (Math.PI/2);
+                console.log(mesh_text);
+                mesh_text.name = "Leon";
+                scene.add( mesh_text_s );
+
+                const text_geometry_z = new THREE.TextGeometry( 'ZTrade', {
+                    font: font,
+                    size: 20,
+                    height: 4,
+                    curveSegments: 12,
+                    bevelEnabled: false
+                });
+                const text_material_z = new THREE.MeshPhongMaterial( { color: 0x007bff } );
+                const mesh_text_z = new THREE.Mesh( text_geometry_z, text_material_z );
+                mesh_text_z.position.x = 90;
+                mesh_text_z.position.y = 40;
+                mesh_text_z.position.z = 250;
+                mesh_text_z.rotation.y = (Math.PI/2);
+                scene.add( mesh_text_z );
+
+                const text_geometry_a = new THREE.TextGeometry( 'NYC Aerospace', {
+                    font: font,
+                    size: 20,
+                    height: 4,
+                    curveSegments: 12,
+                    bevelEnabled: false
+                });
+                const text_material_a = new THREE.MeshPhongMaterial( { color: 0x706C67 } );
+                const mesh_text_a = new THREE.Mesh( text_geometry_a, text_material_a );
+                mesh_text_a.position.x = 90;
+                mesh_text_a.position.y = 40;
+                mesh_text_a.position.z = -140;
+                mesh_text_a.rotation.y = (Math.PI/2);
+                scene.add( mesh_text_a );
+
+                const text_geometry_w = new THREE.TextGeometry( 'Wander', {
+                    font: font,
+                    size: 20,
+                    height: 4,
+                    curveSegments: 12,
+                    bevelEnabled: false
+                });
+                const text_material_w = new THREE.MeshPhongMaterial( { color: 0xff5c00 } );
+                const mesh_text_w = new THREE.Mesh( text_geometry_w, text_material_w );
+                mesh_text_w.position.x = -90;
+                mesh_text_w.position.y = 40;
+                mesh_text_w.position.z = 100;
+
+                mesh_text_w.rotation.y = (Math.PI/2);
+                scene.add( mesh_text_w );
+
+            });
+
+            // lights
+
+            const dirLight1 = new THREE.DirectionalLight( 0xffffff );
+            dirLight1.position.set( 1, 1, 1 );
+            scene.add( dirLight1 );
+
+            const dirLight2 = new THREE.DirectionalLight( 0x002288 );
+            dirLight2.position.set( - 1, - 1, - 1 );
+            scene.add( dirLight2 );
+
+            const ambientLight = new THREE.AmbientLight( 0x222222 );
+            scene.add( ambientLight );
+
+            window.addEventListener( 'resize', onWindowResize );
+
+        }
+
+        function onWindowResize() {
+
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize( window.innerWidth, window.innerHeight );
+
+        }
+
+        var raycaster = new THREE.Raycaster();
+        var mouse = new THREE.Vector2();
+
+        function onDocumentMouseDown( event ) {
+
+            const link_objects = [
+                scene.getObjectByName( 'Leon' ),
+                scene.getObjectByName( 'ZTrade' ),
+                scene.getObjectByName( 'NYCAerospace' ),
+                scene.getObjectByName( 'Wander' )
+            ];
+
+            // update the mouse variable
+            mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+            mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+            raycaster.setFromCamera( mouse, camera );
+            var intersects = raycaster.intersectObjects( link_objects );
+
+            if ( intersects.length > 0 )
+            {
+                if (intersects[0].object.name == 'Leon')
+                    intersects[0].object.material.color.setRGB( 0.8 * Math.random() + 0.2,
+                    0.8 * Math.random() + 0.2,
+                    0.8 * Math.random() + 0.2 );
+                if (intersects[0].object.name == 'ZTrade') window.open("https://api.ztrade.store/");
+                if (intersects[0].object.name == 'NYCAerospace') window.open("https://www.nycaerospace.org/");
+                if (intersects[0].object.name == 'Wander') window.open("https://www.thinkwander.com/");
+            }
+
+        }
+
+        function animate() {
+
+            requestAnimationFrame( animate );
+
+            controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
+
+            render();
+
+        }
+
+        function render() {
+
+            renderer.render( scene, camera );
+
+        }
+
+    </script>
+    <!--<script>
+        VANTA.TOPOLOGY({
+            el: "body",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00
+        })
+    </script>-->
+</body>
+</html>
