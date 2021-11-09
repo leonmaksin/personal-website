@@ -10,7 +10,7 @@ class movPoint {
   constructor(x,y) {
     this.x = x;
     this.y = y;
-    this.steps = 1;
+    this.steps = speed;
     this.direction = (int)(4*Math.random());
   }
   
@@ -39,8 +39,10 @@ class movPoint {
 // }
 
 function mouseDragged() {
-  let newPoint = new movPoint(mouseX,mouseY);
-  movPoints.push(newPoint);
+  if ((mouseX<psizex-220 || mouseX>psizex-20) || (mouseY<psizey-45 || mouseY>psizey-20)) {
+    let newPoint = new movPoint(mouseX,mouseY);
+    movPoints.push(newPoint);
+  }
 }
 
 function setup() {
@@ -48,11 +50,15 @@ function setup() {
   psizey = document.documentElement.clientHeight;
   createCanvas(psizex,psizey);
   colorMode(HSB,100);
+  slider = createSlider(0.01, 1, 0.1, 0.01);
+  slider.position(psizex-220, psizey-40);
+  slider.style('width', '200px');
 }
 
 function draw() {
   background(color,25,50);
   color = (color+0.1)%100;
+  speed = slider.value();
   movPoints.forEach (point => point.draw());
   movPoints.forEach (point => point.move());
 }
