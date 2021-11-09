@@ -37,9 +37,9 @@
         
 
         function createTree(name,color,x,y,z,link_objects) {
-            const geometry_trunk_long = new THREE.CylinderGeometry(4, 4, 100, 16);
-            const geometry_leaves_large = new THREE.CylinderGeometry( 0, 45, 90, 4, 1 );
-            
+            const geometry_trunk_long = new THREE.CylinderGeometry(2, 2, 24, 16);
+            const geometry_leaves_large = new THREE.CylinderGeometry( 0, 20, 40, 4, 1 );
+
             const material = new THREE.MeshPhongMaterial( { color: color, flatShading: true } );
             const material_trunk = new THREE.MeshPhongMaterial( { color: 0x4D4424, flatShading: true } );
             const mesh_trunk = new THREE.Mesh ( geometry_trunk_long, material_trunk );
@@ -124,13 +124,16 @@
             const geometry_leaves_large = new THREE.CylinderGeometry( 0, 45, 90, 4, 1 );
             
             //ZTrade
-            createTree('ZTrade',0x007bff,60,50,220,link_objects);
+            createTree('ZTrade',0x007bff,60,12,220,link_objects);
             
             //NYC Aerospace
-            createTree('NYCAerospace',0x706C67,60,50,-220,link_objects);
+            createTree('NYCAerospace',0x706C67,60,12,-220,link_objects);
             
             //Wander
-            createTree('Wander',0xff5c00,-120,50,60,link_objects);
+            createTree('Wander',0xff5c00,-120,12,60,link_objects);
+
+            //Animations
+            createTree('Slingydots',0x666699,-70,12,200,link_objects);
 
             const loader = new THREE.FontLoader();
             loader.load( './fonts/PT_Sans_Narrow_Regular.json', (font)=> {
@@ -294,6 +297,7 @@
                 else if (intersects[0].object.name == 'ZTrade') window.open("https://api.ztrade.store/");
                 else if (intersects[0].object.name == 'NYCAerospace') window.open("https://www.nycaerospace.org/");
                 else if (intersects[0].object.name == 'Wander') window.open("https://www.thinkwander.com/");
+                else if (intersects[0].object.name == 'Slingydots') window.open("https://leonmaksin.me/slingydots/slingydots.html");
                 else {
                     const parent = intersects[0].object.parent;
                     if (parent.userData.launched == true) return;
