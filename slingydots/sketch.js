@@ -28,7 +28,7 @@ class movPoint {
     else {
       this.x += Math.cos(this.direction*PI/2)*this.steps;
       this.y += Math.sin(this.direction*PI/2)*this.steps;
-      this.steps *= 1.5;
+      this.steps *= 1.2;
     }
   }
 }
