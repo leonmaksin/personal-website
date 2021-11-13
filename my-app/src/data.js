@@ -86,7 +86,7 @@ export default [
         description: `Check these artworks/simulations/whatever-you-want-to-call-it!`,
         breaks: 3,
         url: "https://leonmaksin.me/gallery/",
-        img: "trees.png",
+        img: "eye.png",
         techstack: [
             "Processing",
             "Javascript"
