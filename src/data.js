@@ -22,9 +22,9 @@ export default [
         id: 1,
         title: "NYC Aerospace",
         blurb: "Nonprofit educating students about aerospace with hands-on projects",
-        description: `I founded NYC Aerospace in 2018 and grew the organization to encapsulate nine 
-        schools, 150+ students, and six intensive projects. I started initiatives like a 100,000ft 
-        rocket build in California, an educational rocketry challenge, an incubator program, and more.`,
+        description: `NYC Aerospace was founded in 2018 and encapsulated nine schools, 150+ students, 
+        three museum programs, and six intensive projects. Projects included a 100,000ft rocket 
+        build in California, educational rocketry competition, incubator program, and more.`,
         breaks: 0,
         url: "https://www.nycaerospace.org/",
         img: "rocket.jpg",
