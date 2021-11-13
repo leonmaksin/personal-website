@@ -78,5 +78,18 @@ export default [
             "THREE.js",
             "Javascript"
         ]
+    },
+    {
+        id: 5,
+        title: "Fun Stuff",
+        blurb: "Currently playing with processing in my free time",
+        description: `Check these artworks/simulations/whatever-you-want-to-call-it!`,
+        breaks: 3,
+        url: "https://leonmaksin.me/gallery/",
+        img: "trees.png",
+        techstack: [
+            "Processing",
+            "Javascript"
+        ]
     }
 ]
