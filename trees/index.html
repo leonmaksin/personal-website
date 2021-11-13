@@ -133,7 +133,7 @@
             createTree('Wander',0xff5c00,-120,12,60,link_objects);
 
             //Animations
-            createTree('Slingydots',0x666699,-70,12,200,link_objects);
+            // createTree('Slingydots',0x666699,-70,12,200,link_objects);
 
             const loader = new THREE.FontLoader();
             loader.load( './fonts/PT_Sans_Narrow_Regular.json', (font)=> {
@@ -297,7 +297,7 @@
                 else if (intersects[0].object.name == 'ZTrade') window.open("https://api.ztrade.store/");
                 else if (intersects[0].object.name == 'NYCAerospace') window.open("https://www.nycaerospace.org/");
                 else if (intersects[0].object.name == 'Wander') window.open("https://www.thinkwander.com/");
-                else if (intersects[0].object.name == 'Slingydots') window.open("https://leonmaksin.me/slingydots/");
+                // else if (intersects[0].object.name == 'Slingydots') window.open("https://leonmaksin.me/slingydots/");
                 else {
                     const parent = intersects[0].object.parent;
                     if (parent.userData.launched == true) return;
