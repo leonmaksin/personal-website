@@ -37,7 +37,6 @@ a {
     transition: 1s;
     height: 228px !important;
     width: 287.33px !important;
-    object-fit: cover;
 }
 
 .card-custom:hover .card-custom-image {
