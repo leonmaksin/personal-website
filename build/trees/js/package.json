@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "all": "*",
-    "glslify": "^7.1.1",
-    "three": "^0.133.1",
-    "vanta": "^0.5.21"
-  }
-}
