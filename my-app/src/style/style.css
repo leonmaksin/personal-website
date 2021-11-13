@@ -1,0 +1,46 @@
+body {
+    font-family: 'Work Sans', sans-serif !important;
+    /* font-family: 'Poppins', sans-serif; */
+    margin: 10vh 20vw !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+
+/* .custom-text {
+    color: blue !important;
+}
+
+.card-custom:hover .custom-text {
+    color: aliceblue !important;
+} */
+
+/* .card-custom {
+
+} */
+
+.card-custom-body {
+    transition: 1s;
+    /* color: aliceblue !important; */
+    background-color: white !important;
+    height: 228px;
+}
+
+.card-custom:hover .card-custom-body {
+    /* color: aliceblue !important; */
+    background-color: aliceblue !important;
+}
+
+.card-custom-image {
+    transition: 1s;
+    height: 228px !important;
+    width: 287.33px !important;
+    object-fit: cover;
+}
+
+.card-custom:hover .card-custom-image {
+    transition: 1s;
+    opacity: 0.9;
+}
