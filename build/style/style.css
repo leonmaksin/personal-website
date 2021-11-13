@@ -36,6 +36,7 @@ a {
 .card-custom-image {
     transition: 1s;
     height: 100% !important;
+    width: 100% !important;
     object-fit: cover;
 }
 
