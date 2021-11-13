@@ -1,6 +1,6 @@
 export default function Card(props) {
     const techstack = props.input.techstack.map(function(stackElement) {
-        return <span className="card-text rounded bg-secondary text-white p-1 m-1 custom-text"><small>
+        return <span className="card-text rounded bg-secondary text-white p-1 m-1 custom-text d-inline-block"><small>
             {stackElement}
             </small></span>
     })
@@ -10,11 +10,11 @@ export default function Card(props) {
         breaks.push(<br></br>)
     }
     return (
-        <div className="card mt-4 card-custom">
+        <div className="card-custom card mt-4">
           <a href={props.input.url} target="_blank">
             <div className="row g-0">
                 <div className="col-md-4">
-                    <img src={"./images/"+props.input.img} className="rounded-start card-custom-image" alt="..."/>
+                    <img src={"./images/"+props.input.img} className="rounded-start img-fluid card-custom-image" alt="..."/>
                 </div>
                 <div className="col-md-8 card-custom-body">
                     <div className="card-body">

@@ -25,7 +25,7 @@ a {
     transition: 1s;
     /* color: aliceblue !important; */
     background-color: white !important;
-    height: 228px;
+    /* height: 228px; */
 }
 
 .card-custom:hover .card-custom-body {
@@ -35,8 +35,7 @@ a {
 
 .card-custom-image {
     transition: 1s;
-    height: 228px !important;
-    width: 287.33px !important;
+    height: 100% !important;
     object-fit: cover;
 }
 

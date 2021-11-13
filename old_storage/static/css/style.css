@@ -1,0 +1,32 @@
+body {
+    font-family: 'Work Sans', sans-serif !important;
+    /* font-family: 'Poppins', sans-serif; */
+    margin: 10vh 20vw !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.card-custom-body {
+    transition: 1s;
+    background-color: white !important;
+}
+
+.card-custom:hover .card-custom-body {
+    background-color: aliceblue !important;
+}
+
+.card-custom-image {
+    transition: 1s;
+    object-fit: cover;
+}
+
+.card-custom {
+    height: auto !important;
+}
+
+.card-custom:hover .card-custom-image {
+    transition: 1s;
+    opacity: 0.8;
+}
