@@ -17,15 +17,9 @@ a {
     color: aliceblue !important;
 } */
 
-/* .card-custom {
-
-} */
-
 .card-custom-body {
     transition: 1s;
-    /* color: aliceblue !important; */
     background-color: white !important;
-    /* height: 228px; */
 }
 
 .card-custom:hover .card-custom-body {

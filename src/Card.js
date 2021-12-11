@@ -11,12 +11,12 @@ export default function Card(props) {
     }
     return (
         <div className="card-custom card mt-4">
-          <a href={props.input.url} target="_blank">
+          <a href={props.input.url} target="_blank" rel="noreferrer">
             <div className="row g-0">
                 <div className="col-md-4">
-                    <img src={"./images/"+props.input.img} className="rounded-start img-fluid card-custom-image" alt="..."/>
+                    <img src={"./images/"+props.input.img} className="rounded-left img-fluid card-custom-image" alt="..."/>
                 </div>
-                <div className="col-md-8 card-custom-body">
+                <div className="col-md-8 card-custom-body rounded-right">
                     <div className="card-body">
                         <p className="card-text mb-1 text-muted custom-text"><small>{props.input.blurb}</small></p>
                         <h5 className="card-title mb-2 custom-text">{props.input.title}</h5>

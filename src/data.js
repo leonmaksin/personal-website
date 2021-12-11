@@ -1,6 +1,25 @@
-export default [
+const data = [
     {
         id: 0,
+        title: "AngelBoard (WIP)",
+        blurb: "Donation platform with generative solana crystals for donators as incentive",
+        description: `Developed a donation platform hosted on the solana blockchain that incentivizes
+        donators through beautiful generative crystal NFTs. Solana, Etherium, and card payment procesing
+        allows charities to receive almost 100% of donations and forego most processing fees.`,
+        breaks: 0,
+        url: "https://angelboard.netlify.app/",
+        img: "angelboard.png",
+        techstack: [
+            "Rust",
+            "Processing",
+            "React",
+            "JavaScript",
+            "Solidity",
+            "Solana"
+        ]
+    },
+    {
+        id: 1,
         title: "ZTrade",
         blurb: "Online marketplace for college students and future college creator platform",
         description: `Secure, fast, and easy-to-use online marketplace built to facilitate easy exchange 
@@ -19,7 +38,7 @@ export default [
         ]
     },
     {
-        id: 1,
+        id: 2,
         title: "NYC Aerospace",
         blurb: "Nonprofit educating students about aerospace with hands-on projects",
         description: `NYC Aerospace was founded in 2018 and encapsulated nine schools, 150+ students, 
@@ -34,7 +53,7 @@ export default [
         ]
     },
     {
-        id: 2,
+        id: 3,
         title: "Wander",
         blurb: "Social media platform for discussing and recommending intellectual content",
         description: `Spearheaded product design process and oversaw four teams as product manager by
@@ -51,7 +70,7 @@ export default [
         ]
     },
     {
-        id: 3,
+        id: 4,
         title: "BOND Consulting",
         blurb: "The University of Michigan's original pro-bono consulting group",
         description: `We have worked with over 120 local businesses, startups, and non-profits in 
@@ -66,7 +85,7 @@ export default [
         ]
     },
     {
-        id: 4,
+        id: 5,
         title: "Trees",
         blurb: "WebGL meets link-tree, of sorts",
         description: `My first project using WebGL, and a fun way to spend a Tuesday. Interactive
@@ -80,7 +99,7 @@ export default [
         ]
     },
     {
-        id: 5,
+        id: 6,
         title: "Fun Stuff",
         blurb: "Currently playing with processing in my free time",
         description: `Check these artworks/simulations/whatever-you-want-to-call-it!`,
@@ -93,3 +112,5 @@ export default [
         ]
     }
 ]
+
+export default data;
