@@ -64,6 +64,7 @@ const data = [
         img: "wander.png",
         techstack: [
             "React",
+            "Node.js",
             "Javascript",
             "Heroku",
             "AWS"
@@ -80,7 +81,6 @@ const data = [
         url: "http://www.bond-consulting.org/",
         img: "BOND.png",
         techstack: [
-            "React",
             "Javascript"
         ]
     },
