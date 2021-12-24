@@ -22,9 +22,9 @@ function setup() {
   }
 
   colorMode(HSB, 360, 100, 100);
-  // background(HEXtoHSB('#8A9994'));
-  // normalMaterial();
-  // crystals.forEach(crystal => crystal.drawTris());
+  background(HEXtoHSB('#8A9994'));
+  normalMaterial();
+  crystals.forEach(crystal => crystal.drawTris());
 }
 
 // function mouseClicked() {
@@ -35,8 +35,10 @@ function setup() {
 //   });
 // }
 
-function draw() {
-  orbitControl();
+function mouseDragged() {
+  console.log("hi");
+
+  orbitControl(5,5,5);
 
   background(HEXtoHSB('#8A9994'));
   normalMaterial();
