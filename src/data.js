@@ -26,7 +26,7 @@ const data = [
         for students, creators, and local businesses built as a full-stack application. Currently facilitates 
         transactions at 3+ college campuses but plateauing growth; project on hold indefinitely.`,
         breaks: 0,
-        url: "https://api.ztrade.store/",
+        url: "https://www.ztrade.store/",
         img: "ztrade.png",
         techstack: [
             "Django",
