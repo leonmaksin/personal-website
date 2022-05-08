@@ -64,12 +64,12 @@ function mouseClicked() {
   let ydist = abs(mouseY-sizey/2.19);
   if (xdist*xdist+ydist*ydist < 960) {
     // circle(sizex/2,sizey/2.19,62);
-    redirectPage('https://www.google.com/');
+    redirectPage('https://mothers-day-puzzle.netlify.app/');
   }
 }
 
 function redirectPage(link) {
-  open1(link)
+  open(link)
 }
 
 function setup() {
