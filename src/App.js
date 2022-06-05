@@ -19,7 +19,10 @@ function App() {
         </nav>
         <div class="introduction mt-3">
           <h1>Hello, I'm <a href="#aboutme">Leon</a></h1>
-          <p class="mt-3">Welcome, I'm glad you found your way here! I'm a problem-solver that loves to create. 
+          <p class="mt-3">Welcome, I'm glad you found your way here! 
+          Currently, I'm an engineer at <a href="https://bubble.io" target="_blank" rel="noreferrer">Bubble</a>, 
+          the most powerful no-code platform for building digital products. 
+          I'm also a problem-solver that loves to create. 
           But instead of talking about myself, I'd rather just show you:</p>
         </div>
       </div>
