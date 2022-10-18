@@ -100,7 +100,7 @@ const data = [
     },
     {
         id: 6,
-        title: "Fun Stuff",
+        title: "Generative Art",
         blurb: "Currently playing with processing in my free time",
         description: `Check these artworks/simulations/whatever-you-want-to-call-it!`,
         breaks: 3,
@@ -109,6 +109,22 @@ const data = [
         techstack: [
             "Processing",
             "Javascript"
+        ]
+    },
+    {
+        id: 7,
+        title: "Super Scripts",
+        blurb: "Some productivity scripts to prevent your procrastination Daemons",
+        description: `An automatic site blacklister and closer, a shutdown script linked to your calendar,
+        and a guest/incognito access toggler. Built to boost productivity and learn Bash, AppleScript, and
+        Daemons. Let me know if you'd like to set these up and try them out for yourself!`,
+        breaks: 2,
+        url: "https://github.com/leonmaksin/super-scripts",
+        img: "bash.png",
+        techstack: [
+            "Bash",
+            "AppleScript",
+            "XML"
         ]
     }
 ]
