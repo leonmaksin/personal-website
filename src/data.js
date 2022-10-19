@@ -1,7 +1,7 @@
 const data = [
     {
         id: 0,
-        title: "AngelBoard (WIP)",
+        title: "AngelBoard",
         blurb: "Donation platform with generative solana crystals for donators as incentive",
         description: `Developed a donation platform hosted on the solana blockchain that incentivizes
         donators through beautiful generative crystal NFTs. Solana, Etherium, and card payment procesing
