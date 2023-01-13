@@ -99,6 +99,21 @@ const data = [
         ]
     },
     {
+        id: 8,
+        title: "GPT-3 Travel Finder",
+        blurb: "In the future, we plan our trips with AI...",
+        description: `Pick a spot on the map, choose a category of activities, and let GPT-3 plan the rest!
+        The website will create a smart prompt for any input, then call OpenAI's' API to share a few recommendations.`,
+        breaks: 1,
+        url: "https://www.gptravel.app/",
+        img: "gptravel.png",
+        techstack: [
+            "GPT-3",
+            "Javascript",
+            "Next.js"
+        ]
+    },
+    {
         id: 6,
         title: "Generative Art",
         blurb: "Currently playing with processing in my free time",
@@ -118,7 +133,7 @@ const data = [
         description: `An automatic site blacklister and closer, a shutdown script linked to your calendar,
         and a guest/incognito access toggler. Built to boost productivity and learn Bash, AppleScript, and
         Daemons. Let me know if you'd like to set these up and try them out for yourself!`,
-        breaks: 2,
+        breaks: 0,
         url: "https://github.com/leonmaksin/super-scripts",
         img: "bash.png",
         techstack: [
