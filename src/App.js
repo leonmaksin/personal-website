@@ -20,7 +20,7 @@ function App() {
         <div class="introduction mt-3">
           <h1>Hello, I'm <a href="#aboutme">Leon</a></h1>
           <p class="mt-3">Welcome, I'm glad you found your way here! 
-          Currently, I'm spending time in Europe, doing nonprofit work, and co-founding something special.
+          Currently, I'm spending time in Europe, doing nonprofit work, and building something special.
           I'm also a problem-solver that loves to create. 
           But instead of talking about myself, I'd rather just show you:</p>
         </div>
