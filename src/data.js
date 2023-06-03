@@ -26,7 +26,7 @@ const data = [
         for students, creators, and local businesses built as a full-stack application. Currently facilitates 
         transactions at 3+ college campuses but plateauing growth; project on hold indefinitely.`,
         breaks: 0,
-        url: "https://www.ztrade.store/",
+        url: "https://joseph-stern.herokuapp.com/",
         img: "ztrade.png",
         techstack: [
             "Django",
