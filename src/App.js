@@ -20,8 +20,11 @@ function App() {
         <div class="introduction mt-3">
           <h1>Hello, I'm <a href="#aboutme">Leon</a></h1>
           <p class="mt-3">Welcome, I'm glad you found your way here! 
-          Currently, I'm spending time in Europe, doing nonprofit work, and building something special.
-          I'm also a problem-solver that loves to create. 
+          I'm currently spending most of my time working on growth, product, and engineering
+          at <a href="https://bubble.io" target="_blank" rel="noreferrer">Bubble.io</a>.
+          I'm also helping <a href="https://shiftcreator.space/" target="_blank" rel="noreferrer">Shift</a>
+          &#160;and <a href="https://www.bond-consulting.org/" target="_blank" rel="noreferrer">BOND</a> get ready for the Fall,
+          and am developing a course on Quantum Computing. Most importantly, I'm a problem-solver and love to create. 
           But instead of talking about myself, I'd rather just show you:</p>
         </div>
       </div>
@@ -36,8 +39,6 @@ function App() {
         and minoring in Mathematics. I've always had an intense passion for creating, and have built anything from rockets 
         to physics simulations to WebGL websites. I also have strong interests in startup, product, growth, software, 
         and innovation in the fields of aerospace, crypto, edtech, community-building, and want to break down barriers. 
-        Recently, I was an engineer at <a href="https://bubble.io" target="_blank" rel="noreferrer">Bubble</a>, 
-        the most powerful no-code platform for building digital products. 
         I strive to create as much as possible, and in my free time, I enjoy reading, exercising, playing card games and chess, 
         and spending time with my five younger siblings. Contact me at <a class="email-link" href="mailto: lmaksin@umich.edu">lmaksin@umich.edu</a>!</p>
       </div>
