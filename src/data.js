@@ -3,8 +3,8 @@ const data = [
         id: 0,
         title: "AngelBoard",
         blurb: "Donation platform with generative solana crystals for donators as incentive",
-        description: `Developed a donation platform hosted on the solana blockchain that incentivizes
-        donators through beautiful generative crystal NFTs. Solana, Etherium, and card payment procesing
+        description: `Developed a donation platform hosted on the Solana blockchain that incentivizes 
+        donators through beautiful generative crystal NFTs. Solana, Ethereum, and card payment processing 
         allows charities to receive almost 100% of donations and forego most processing fees.`,
         breaks: 0,
         url: "https://angelboard.netlify.app/",
