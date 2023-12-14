@@ -20,13 +20,13 @@ function App() {
         <div class="introduction mt-3">
           <h1>Hello, I'm <a href="#aboutme">Leon</a></h1>
           <p class="mt-3">Welcome, I'm glad you found your way here! 
-          I'm finishing up @ umich and am spending the semester 
+          I'm finishing up @ umich and am spending some time 
           running <a href="https://shiftcreator.space/" target="_blank" rel="noreferrer">Shift</a>, teaching newbies
           for <a href="https://www.bond-consulting.org/" target="_blank" rel="noreferrer">BOND</a>, 
           and gearing up to help teach a course 
           on <a href="https://www.eecs.umich.edu/courses/eecs498.001/" target="_blank" rel="noreferrer">Quantum Computing</a>. 
-          I'm also digging deep into music; I learned to play guitar, am making a real-time sound to art piece (coming soon), 
-          and will be building a synth instrument with some buddies soon. Throughout, I'm a problem-solver, and I love to create. 
+          I'm also digging deep into music; I learned to play guitar, am making a real-time sound to art piece, 
+          and am building a synth instrument soon. Really, I love to create and solve hard problems. 
           But instead of talking about myself, I'd rather just show you:</p>
         </div>
       </div>
