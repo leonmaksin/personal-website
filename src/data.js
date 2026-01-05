@@ -26,7 +26,7 @@ const data = [
         shows a visualization sensitive to frequencies, amplitudes, and more. Choose one of the
         provided songs, or play into your microphone to see the magic happen live 💃 🕺`,
         breaks: 0,
-        url: "https://audio-art.replit.app/",
+        url: "https://leonmaksin.github.io/audio-art/",
         img: "audio-viz.png",
         techstack: [
             "Processing",
