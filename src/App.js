@@ -21,10 +21,8 @@ function App() {
           <h1>Hello, I'm <a href="#aboutme">Leon</a></h1>
           <p class="mt-3">Welcome, I'm glad you found your way here! 
           I'm a researcher at OpenAI, working on <a href="https://evals.openai.com/" target="_blank" rel="noreferrer">frontier evals</a>.
-          I spend most of my time trying to deeply understand the models we train, and care a lot about achieving superintelligence responsibly.
-          I was previously @ umich working on <a href="https://shiftcreator.space/" target="_blank" rel="noreferrer">Shift</a>,
-          <a href="https://www.bond-consulting.org/" target="_blank" rel="noreferrer">BOND</a>, school, and many other things.
-          I like to hike, read, play music, explore SF parks, play board games, and spend time with my 5 younger siblings.
+          I spend most of my time trying to deeply understand the models we train, and care about responsibly achieving superintelligence.
+          I was previously @ umich, and like to hike, read, play music, explore parks, play board games, and spend time with my 5 younger siblings.
           I love to create and solve hard problems. But enough talk about myself, I'd rather just show you:</p>
         </div>
       </div>
