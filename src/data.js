@@ -1,5 +1,21 @@
 const data = [
     {
+        id: 9,
+        title: "Music Visualizer",
+        blurb: "Real-time audio-reactive visualizer for music",
+        description: `Takes live sound or music input and turns it into art real-time! Each panel
+        shows a visualization sensitive to frequencies, amplitudes, and more. Choose one of the
+        provided songs, or play into your microphone to see the magic happen live 💃 🕺`,
+        breaks: 0,
+        url: "https://leonmaksin.github.io/audio-art/",
+        img: "audio-viz.png",
+        techstack: [
+            "Processing",
+            "Javascript",
+            "Audio"
+        ]
+    },
+    {
         id: 0,
         title: "AngelBoard",
         blurb: "Donation platform with generative solana crystals for donators as incentive",
@@ -16,22 +32,6 @@ const data = [
             "JavaScript",
             "Solidity",
             "Solana"
-        ]
-    },
-    {
-        id: 9,
-        title: "Music Visualizer [WIP]",
-        blurb: "Real-time audio-reactive visualizer for music",
-        description: `Takes live sound or music input and turns it into art real-time! Each panel
-        shows a visualization sensitive to frequencies, amplitudes, and more. Choose one of the
-        provided songs, or play into your microphone to see the magic happen live 💃 🕺`,
-        breaks: 0,
-        url: "https://leonmaksin.github.io/audio-art/",
-        img: "audio-viz.png",
-        techstack: [
-            "Processing",
-            "Javascript",
-            "Audio"
         ]
     },
     {
