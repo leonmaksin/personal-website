@@ -1,5 +1,25 @@
 const data = [
     {
+        id: 10,
+        title: "BookGraph",
+        blurb: "Personalized, interactive 3D map of 289,000 Goodreads books",
+        description: `Built a pipeline to ingest and embed open-source Goodreads data, project them into 3D space with UMAP,
+        and render the universe in WebGL. You can explore clusters, use queries for semantic teleportation, and even upload
+        your own personal Goodreads CSV to place yourself on the map!`,
+        breaks: 0,
+        url: "https://bookgraph.up.railway.app/",
+        img: "bookgraph.png",
+        techstack: [
+            "Embeddings",
+            "PostgreSQL",
+            "pgvector",
+            "THREE.js",
+            "FastAPI",
+            "DuckDB",
+            "Python",
+        ]
+    },
+    {
         id: 9,
         title: "Music Visualizer",
         blurb: "Real-time audio-reactive visualizer for music",
